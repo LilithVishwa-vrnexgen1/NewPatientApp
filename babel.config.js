@@ -6,8 +6,10 @@ module.exports = {
       'react-native-iconify/babel',
       {
         icons: [
-          'mdi:home',
-          'mdi:account',
+          'boxicons:home-alt',
+          'boxicons:user',
+          'boxicons:bolt',
+          'boxicons:folder',
           'mdi:lightning-bolt',
           'mdi:folder',
           'ph:less-than-bold',
