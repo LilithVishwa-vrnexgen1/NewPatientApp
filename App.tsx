@@ -1,23 +1,25 @@
 import React from 'react';
 
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+// import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
 
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+// import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-// import AppHeader from './src/components/AppHeader';
+// // import AppHeader from './src/components/AppHeader';
 
-// import HomeScreen from './src/screens/Home/HomeScreen';
+// // import HomeScreen from './src/screens/Home/HomeScreen';
 import BottomTabBar from './src/components/BottomTabBar';
+import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import AppHeader from './src/components/AppHeader';
+// import HomeScreen from './src/screens/Home/HomeScreen';
 
 function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <StatusBar barStyle="auto" />
       <View style={styles.container}>
         <View style={styles.content}>
-          {/* <AppHeader variant="home" /> */}
+          <AppHeader variant="page" />
           {/* <HomeScreen /> */}
         </View>
         <BottomTabBar />
