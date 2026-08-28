@@ -59,7 +59,8 @@ function ActionsGrid({
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
+    marginHorizontal: 16,
+    marginVertical: 10,
   },
 
   header: {

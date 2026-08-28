@@ -23,13 +23,13 @@ function App() {
         <View style={styles.content}>
           {/*<AppHeader variant="page" />*/}
           {/* <HomeScreen /> */}
-          <AppHeader
+          {/*<AppHeader
             variant="page"
             title="Online Consult"
             // onBackPress={() => navigate.goBack()}
-          />
+          />*/}
 
-          <OnlineConsultScreen />
+          {/*<OnlineConsultScreen />*/}
           <AppHeader variant="home" />
           <Home />
         </View>
