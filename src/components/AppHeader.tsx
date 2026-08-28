@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather';
 import colors from '../theme/colors';
-// import { Icon } from './Icon';
+import { Icon } from './Icon';
 
 type AppHeaderProps = {
   variant?: 'home' | 'page';
@@ -25,7 +25,7 @@ const AppHeader = ({
   const insets = useSafeAreaInsets();
 
   return (
-    <View style={[styles.container, { paddingTop: insets.top + 12 }]}>
+    <View style={[styles.container, { paddingTop: insets.top }]}>
       <View style={styles.row}>
         {variant === 'page' ? (
           <TouchableOpacity
@@ -34,6 +34,7 @@ const AppHeader = ({
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           >
             <Feather name="chevron-left" size={26} color={colors.textDark} />
+            {/*<Icon name="ph:less-than-bol" size={26} color={colors.textDark} />*/}
           </TouchableOpacity>
         ) : (
           <View style={{ gap: 12 }}>
@@ -62,8 +63,8 @@ const AppHeader = ({
           style={styles.bellButton}
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
-          {/*<Feather name="bell" size={22} color={colors.textDark} />*/}
-          {/*<Icon name="mdi:bell-badge" size={24} color="#333" />*/}
+          <Feather name="bell" size={22} color={colors.textDark} />
+          {/*<Icon name="clarity:notification-line" size={24} color="#333" />*/}
           {hasNotification && <View style={styles.notificationDot} />}
         </TouchableOpacity>
       </View>
