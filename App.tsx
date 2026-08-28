@@ -8,10 +8,10 @@ import React from 'react';
 
 // // import HomeScreen from './src/screens/Home/HomeScreen';
 import BottomTabBar from './src/components/BottomTabBar';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import { StatusBar, StyleSheet, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AppHeader from './src/components/AppHeader';
-// import HomeScreen from './src/screens/Home/HomeScreen';
+import Home from './src/screens/Home/Home';
 
 function App() {
   return (
@@ -19,8 +19,8 @@ function App() {
       <StatusBar barStyle="auto" />
       <View style={styles.container}>
         <View style={styles.content}>
-          <AppHeader variant="page" />
-          {/* <HomeScreen /> */}
+          <AppHeader variant="home" />
+          <Home />
         </View>
         <BottomTabBar />
       </View>
