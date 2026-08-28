@@ -8,11 +8,12 @@ import React from 'react';
 
 // // import HomeScreen from './src/screens/Home/HomeScreen';
 import BottomTabBar from './src/components/BottomTabBar';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import { StatusBar, StyleSheet, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AppHeader from './src/components/AppHeader';
 import OnlineConsultScreen from './src/screens/ OnlineConsult/OnlineConsultScreen';
 // import HomeScreen from './src/screens/Home/HomeScreen';
+import Home from './src/screens/Home/Home';
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
           />
 
           <OnlineConsultScreen />
+          <AppHeader variant="home" />
+          <Home />
         </View>
         <BottomTabBar />
       </View>
