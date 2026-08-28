@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   pageTitle: {
+    // fontFamily: 'Roboto-Bold',
     fontSize: 19,
     fontWeight: '700',
     color: colors.textDark,

@@ -8,6 +8,7 @@ interface QuickAction {
   iconColor: string;
   backgroundColor: string;
   onPress?: () => void;
+  size?: number;
 }
 
 interface QuickActionsProps {
@@ -15,6 +16,7 @@ interface QuickActionsProps {
   actions: QuickAction[];
   onViewAll?: () => void;
   viewAllLabel?: string;
+  size?: number;
 }
 
 function ActionsGrid({
@@ -22,6 +24,7 @@ function ActionsGrid({
   actions,
   onViewAll,
   viewAllLabel = 'View All',
+  size,
 }: QuickActionsProps) {
   return (
     <View style={styles.container}>
@@ -46,7 +49,11 @@ function ActionsGrid({
                 { backgroundColor: action.backgroundColor },
               ]}
             >
-              <Icon name={action.icon} size={28} color={action.iconColor} />
+              <Icon
+                name={action.icon}
+                size={action.size ? action.size : 28}
+                color={action.iconColor}
+              />
             </View>
 
             <Text style={styles.actionLabel}>{action.label}</Text>
@@ -59,7 +66,8 @@ function ActionsGrid({
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
+    marginHorizontal: 16,
+    marginVertical: 10,
   },
 
   header: {

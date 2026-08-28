@@ -1,7 +1,15 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  ImageSourcePropType,
+} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import colors from '../theme/colors';
+import { Icon } from './Icon';
 
 export type Doctor = {
   id: string;
@@ -12,7 +20,7 @@ export type Doctor = {
   experienceYears: number;
   hospital: string;
   fee: number;
-  avatar: string; // image URL or local require result
+  avatar: ImageSourcePropType | string; // image URL or local require result
   isOnline?: boolean;
 };
 
@@ -27,11 +35,14 @@ const DoctorCard: React.FC<DoctorCardProps> = ({
   onBookOnline,
   onVisitClinic,
 }) => {
+  const avatarSource =
+    typeof doctor.avatar === 'string' ? { uri: doctor.avatar } : doctor.avatar;
+
   return (
     <View style={styles.card}>
       <View style={styles.topRow}>
         <View style={styles.avatarWrap}>
-          <Image source={{ uri: doctor.avatar }} style={styles.avatar} />
+          <Image source={avatarSource} style={styles.avatar} />
           {doctor.isOnline && <View style={styles.onlineDot} />}
         </View>
 
@@ -40,7 +51,8 @@ const DoctorCard: React.FC<DoctorCardProps> = ({
           <Text style={styles.specialty}>{doctor.specialty}</Text>
 
           <View style={styles.metaRow}>
-            <Feather name="star" size={13} color="#F5A623" />
+            <Icon name="ant-design:star-filled" size={13} color="#FACC15" />
+
             <Text style={styles.metaText}>
               {' '}
               {doctor.rating} ({doctor.reviewCount} reviews) |{' '}
@@ -97,13 +109,13 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   avatar: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
+    width: 60,
+    height: 60,
+    borderRadius: 9999,
   },
   onlineDot: {
     position: 'absolute',
-    bottom: 2,
+    bottom: 12,
     right: 2,
     width: 12,
     height: 12,

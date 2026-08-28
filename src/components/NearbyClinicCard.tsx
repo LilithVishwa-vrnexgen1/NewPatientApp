@@ -1,5 +1,12 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  ImageSourcePropType,
+} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import colors from '../theme/colors';
 
@@ -8,7 +15,7 @@ export type Clinic = {
   name: string;
   distanceKm: number;
   isOpen24x7?: boolean;
-  image: string;
+  image: ImageSourcePropType | string;
 };
 
 type NearbyClinicCardProps = {
@@ -22,13 +29,15 @@ const NearbyClinicCard: React.FC<NearbyClinicCardProps> = ({
   onGetDirections,
   onPress,
 }) => {
+  const clinicImage =
+    typeof clinic.image === 'string' ? { uri: clinic.image } : clinic.image;
   return (
     <TouchableOpacity
       style={styles.card}
       activeOpacity={0.8}
       onPress={() => onPress?.(clinic)}
     >
-      <Image source={{ uri: clinic.image }} style={styles.image} />
+      <Image source={clinicImage} style={styles.image} />
 
       <View style={styles.infoWrap}>
         <Text style={styles.name}>{clinic.name}</Text>

@@ -1,19 +1,30 @@
 import React from 'react';
-
-// import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-
-// import { SafeAreaProvider } from 'react-native-safe-area-context';
-
-// // import AppHeader from './src/components/AppHeader';
-
-// // import HomeScreen from './src/screens/Home/HomeScreen';
 import BottomTabBar from './src/components/BottomTabBar';
 import { StatusBar, StyleSheet, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import AppHeader from './src/components/AppHeader';
 import OnlineConsultScreen from './src/screens/ OnlineConsult/OnlineConsultScreen';
-// import HomeScreen from './src/screens/Home/HomeScreen';
 import Home from './src/screens/Home/Home';
+import { NavigationContainer } from '@react-navigation/native';
+import {
+  createNativeStackNavigator,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
+
+export type RootStackParamList = {
+  Home: undefined;
+  OnlineConsult: undefined;
+};
+
+export type HomeScreenProps = NativeStackScreenProps<
+  RootStackParamList,
+  'Home'
+>;
+export type OnlineConsultScreenProps = NativeStackScreenProps<
+  RootStackParamList,
+  'OnlineConsult'
+>;
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App() {
   return (
@@ -21,19 +32,29 @@ function App() {
       <StatusBar barStyle="auto" />
       <View style={styles.container}>
         <View style={styles.content}>
-          {/*<AppHeader variant="page" />*/}
-          {/* <HomeScreen /> */}
-          <AppHeader
+          {/*<AppHeader
             variant="page"
             title="Online Consult"
             // onBackPress={() => navigate.goBack()}
           />
+          <OnlineConsultScreen />*/}
 
-          <OnlineConsultScreen />
-          <AppHeader variant="home" />
-          <Home />
+          {/*<AppHeader variant="home" />
+          <Home />*/}
+          <NavigationContainer>
+            <Stack.Navigator
+              initialRouteName="Home"
+              screenOptions={{ headerShown: false }}
+            >
+              <Stack.Screen name="Home" component={Home} />
+              <Stack.Screen
+                name="OnlineConsult"
+                component={OnlineConsultScreen}
+              />
+            </Stack.Navigator>
+            <BottomTabBar />
+          </NavigationContainer>
         </View>
-        <BottomTabBar />
       </View>
     </SafeAreaProvider>
   );

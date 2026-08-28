@@ -1,31 +1,34 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Icon } from './Icon';
-
-const tabs = [
-  {
-    name: 'Home',
-    icon: 'boxicons:home-alt',
-  },
-  {
-    name: 'Consult',
-    icon: 'boxicons:user',
-  },
-  {
-    name: 'AIHealth',
-    icon: 'boxicons:bolt',
-    isCenter: true,
-  },
-  {
-    name: 'Records',
-    icon: 'boxicons:folder',
-  },
-  {
-    name: 'Profile',
-    icon: 'boxicons:user',
-  },
-];
+import { useNavigation } from '@react-navigation/native';
 
 function BottomTabBar() {
+  const navigation = useNavigation<any>();
+  const tabs = [
+    {
+      name: 'Home',
+      icon: 'boxicons:home-alt',
+      onPress: () => navigation.navigate('Home'),
+    },
+    {
+      name: 'Consult',
+      icon: 'boxicons:user',
+      onPress: () => navigation.navigate('OnlineConsult'),
+    },
+    {
+      name: 'AIHealth',
+      icon: 'boxicons:bolt',
+      isCenter: true,
+    },
+    {
+      name: 'Records',
+      icon: 'boxicons:folder',
+    },
+    {
+      name: 'Profile',
+      icon: 'boxicons:user',
+    },
+  ];
   return (
     <View style={styles.footer}>
       {tabs.map(tab => {
@@ -44,7 +47,7 @@ function BottomTabBar() {
 
         // Normal tabs
         return (
-          <Pressable key={tab.name} style={styles.tab}>
+          <Pressable key={tab.name} style={styles.tab} onPress={tab.onPress}>
             <Icon name={tab.icon} size={24} color="#333" />
 
             <Text style={styles.label}>{tab.name}</Text>
