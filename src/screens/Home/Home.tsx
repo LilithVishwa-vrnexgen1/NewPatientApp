@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import ActionsGrid from '../../shared/ActionsGrid';
 import { Icon } from '../../components/Icon';
+import MetricsCard from '../../shared/MetricsCard';
+import AppHeader from '../../components/AppHeader';
 
 const quickActions = [
   {
@@ -76,6 +78,41 @@ const quickActions = [
   },
 ];
 
+const vitals = [
+  {
+    id: 'steps',
+    label: 'Steps',
+    value: '8,640',
+    icon: 'material-symbols:steps',
+    iconColor: '#22C55E',
+    backgroundColor: '#F0FDF4',
+  },
+  {
+    id: 'sleep',
+    label: 'Sleep',
+    value: '7h 45m',
+    icon: 'material-symbols:bedtime',
+    iconColor: '#3B82F6',
+    backgroundColor: '#EFF6FF',
+  },
+  {
+    id: 'heart-rate',
+    label: 'Heart Rate',
+    value: '72 BPM',
+    icon: 'mdi:heart',
+    iconColor: '#A855F7',
+    backgroundColor: '#FAF5FF',
+  },
+  {
+    id: 'calories',
+    label: 'Calories',
+    value: '1,560',
+    icon: 'mdi:fire',
+    iconColor: '#F97316',
+    backgroundColor: '#FFF7ED',
+  },
+];
+
 function Home() {
   // const handleViewAll = () => {
   //   console.log('View all clicked');
@@ -83,43 +120,85 @@ function Home() {
   //
   //
   return (
-    <ScrollView style={styles.main}>
-      <Pressable style={styles.container}>
-        <View style={styles.avatarWrapper}>
-          <Image
-            source={require('../../assets/profile.jpg')}
-            style={styles.avatar}
-          />
-          <View style={styles.onlineDot} />
-        </View>
-        <View>
-          <Text style={styles.title}>
-            Good Morning, <Text style={styles.name}>Priya</Text>
-          </Text>
-          <Text style={styles.message}>Take charge of your health today!</Text>
-        </View>
-      </Pressable>
-      <View style={styles.membershipCard}>
-        <View style={styles.membershipHeader}>
-          <Text style={styles.membershipCardTitle}>Premium Membership</Text>
+    <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
+      <AppHeader variant="home" />
+      <ScrollView style={styles.main}>
+        <Pressable style={styles.container}>
+          <View style={styles.avatarWrapper}>
+            <Image
+              source={require('../../assets/profile.jpg')}
+              style={styles.avatar}
+            />
+            <View style={styles.onlineDot} />
+          </View>
+          <View>
+            <Text style={styles.title}>
+              Good Morning, <Text style={styles.name}>Priya</Text>
+            </Text>
+            <Text style={styles.message}>
+              Take charge of your health today!
+            </Text>
+          </View>
+        </Pressable>
+        <View style={styles.membershipCard}>
+          <View style={styles.membershipHeader}>
+            <Text style={styles.membershipCardTitle}>Premium Membership</Text>
 
-          <Pressable style={styles.manageButton}>
-            <Text style={styles.manageText}>Manage</Text>
+            <Pressable style={styles.manageButton}>
+              <Text style={styles.manageText}>Manage</Text>
 
-            <Icon name="mdi:chevron-right" size={20} color="#3767C7" />
-          </Pressable>
+              <Icon name="mdi:chevron-right" size={20} color="#3767C7" />
+            </Pressable>
+          </View>
+
+          <View style={styles.membershipImgoutline}>
+            <Image
+              source={require('../../assets/MemberShip_card.png')}
+              style={styles.membershipImage}
+              resizeMode="cover"
+            />
+          </View>
         </View>
 
-        <View style={styles.membershipImgoutline}>
-          <Image
-            source={require('../../assets/MemberShip_card.png')}
-            style={styles.membershipImage}
-            resizeMode="cover"
-          />
+        <View style={styles.health}>
+          <MetricsCard>
+            <View style={styles.cardHeader2}>
+              <Text style={styles.cardTitle}>Health Score</Text>
+              <Icon name="hugeicons:information-circle" size={10} />
+            </View>
+            <Text>82/ 100</Text>
+          </MetricsCard>
+          <MetricsCard>
+            <View style={styles.cardHeader}>
+              <Text style={styles.cardTitle}>Today's Vitals</Text>
+              <Pressable>
+                <Text style={styles.viewAll}>View All</Text>
+              </Pressable>
+            </View>
+            <View style={styles.vitalsList}>
+              {vitals.map(vital => (
+                <View style={styles.vitalRow}>
+                  <View
+                    style={[
+                      styles.iconBox,
+                      { backgroundColor: vital.backgroundColor },
+                    ]}
+                  >
+                    <Icon name={vital.icon} size={20} color={vital.iconColor} />
+                  </View>
+
+                  <Text style={styles.vitalLabel}>{vital.label}</Text>
+
+                  <Text style={styles.vitalValue}>{vital.value}</Text>
+                </View>
+              ))}
+            </View>
+          </MetricsCard>
         </View>
-      </View>
-      <ActionsGrid label="Quick Actions" actions={quickActions} />
-    </ScrollView>
+
+        <ActionsGrid label="Quick Actions" actions={quickActions} />
+      </ScrollView>
+    </View>
   );
 }
 
@@ -131,14 +210,12 @@ const styles = StyleSheet.create({
   membershipCard: {
     paddingHorizontal: 16,
     paddingVertical: 4,
-    // gap: 8,
   },
 
   membershipHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-
     marginBottom: 12,
   },
 
@@ -226,6 +303,71 @@ const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 16,
     color: '#64748B',
+  },
+
+  // MetricsCard
+  health: {
+    flexDirection: 'row',
+    paddingHorizontal: 16,
+    paddingVertical: 4,
+    gap: 12,
+  },
+
+  cardHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 16,
+    gap: 2,
+  },
+  cardHeader2: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    // justifyContent: 'space-between',
+    marginBottom: 16,
+    gap: 4,
+  },
+
+  cardTitle: {
+    fontSize: 16,
+    fontWeight: '700',
+    lineHeight: 24,
+    color: '#0F172A',
+  },
+
+  viewAll: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#3767C7',
+  },
+
+  vitalsList: {
+    gap: 12,
+  },
+
+  vitalRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  vitalLabel: {
+    flex: 1,
+    marginLeft: 10,
+    fontSize: 13,
+    color: '#64748B',
+  },
+
+  vitalValue: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#0F172A',
+  },
+  iconBox: {
+    height: 24,
+    width: 24,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 export default Home;
