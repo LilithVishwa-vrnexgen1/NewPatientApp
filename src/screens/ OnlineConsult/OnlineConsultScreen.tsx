@@ -1,3 +1,4 @@
+import '../../../global.css';
 import React, { useState } from 'react';
 import {
   View,
@@ -145,6 +146,9 @@ const OnlineConsultScreen = ({ navigation }: any) => {
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
       >
+        <Text className="text-red-500 flex-row text-center ">
+          Hello Lilith Vishwa
+        </Text>
         <SearchBar />
 
         {/* Online / Clinic Visit toggle */}
